@@ -33,7 +33,11 @@ function CatFace() {
     fetchData();
   }, []);
 
-  return <img src={catImage} alt="Cat" />;
+  return (
+    <div className="flex justify-center w-screen h-96 p-6">
+      <img src={catImage} alt="Cat" />
+    </div>
+  );
 }
 
 function CatFact() {
@@ -43,13 +47,19 @@ function CatFact() {
     async function fetchData() {
       const res = await fetch("https://cat-fact.herokuapp.com/facts");
       const data = await res.json();
-      setFacts(data[1].text);
+      const randomNumber = Math.floor(Math.random() * data.length);
+      console.log(randomNumber);
+      setFacts(data[randomNumber].text);
     }
 
     fetchData();
   }, []);
   console.log("hi");
-  return <h1>{fact}</h1>;
+  return (
+    <div>
+      <h1 className="text-center">{fact}</h1>
+    </div>
+  );
 }
 
 export default App;
